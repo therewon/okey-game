@@ -1,0 +1,21 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "rooms": {
+      "$roomCode": {
+        ".read": "auth != null",
+        ".write": "auth != null && ((!data.exists() && newData.child('meta').child('hostId').val() === auth.uid) || data.child('players').child(auth.uid).exists() || (data.child('meta').child('status').val() === 'waiting' && newData.child('players').child(auth.uid).exists()))",
+        ".validate": "!newData.exists() || (newData.hasChildren(['meta', 'players']) && !newData.child('meta').child('playerOrder').child('4').exists())",
+        "meta": {
+          ".validate": "newData.hasChildren(['hostId', 'status', 'createdAt', 'updatedAt', 'lastActivityAt', 'currentPlayerIndex', 'playerOrder', 'round']) && newData.child('hostId').isString() && (newData.child('status').val() === 'waiting' || newData.child('status').val() === 'playing' || newData.child('status').val() === 'finished')"
+        },
+        "players": {
+          "$uid": {
+            ".validate": "!newData.exists() || (newData.hasChildren(['uid', 'nickname', 'connected', 'ready', 'tileCount', 'joinedAt']) && newData.child('uid').val() === $uid && newData.child('nickname').isString() && newData.child('nickname').val().length >= 2 && newData.child('nickname').val().length <= 24 && newData.child('connected').isBoolean() && newData.child('ready').isBoolean() && newData.child('tileCount').isNumber() && newData.child('tileCount').val() >= 0 && newData.child('tileCount').val() <= 15)"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+node_modules
+dist
+shared/dist
+functions/lib
+.firebase
+*-debug.log
+.tools
+*.local
+.env
+coverage

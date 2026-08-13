@@ -1,0 +1,43 @@
+{
+  "name": "okey-online",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "shared"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build -w @okey/shared && tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:rules": "firebase emulators:exec --only database \"vitest run tests/database.rules.test.ts\"",
+    "test:multiplayer": "npm run build -w @okey/shared && firebase emulators:exec --only auth,database \"vitest run tests/multiplayer.integration.test.ts\"",
+    "firebase:emulators": "npm run build -w @okey/shared && firebase emulators:start --only auth,database,hosting",
+    "deploy": "npm run build && firebase deploy --only database,hosting"
+  },
+  "dependencies": {
+    "@okey/shared": "file:./shared",
+    "firebase": "^11.10.0",
+    "lucide-react": "^0.539.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.8.0"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^4.0.1",
+    "@tailwindcss/forms": "^0.5.10",
+    "@types/node": "^22.17.1",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.4.21",
+    "firebase-tools": "^14.12.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.1",
+    "vitest": "^3.2.4"
+  }
+}
