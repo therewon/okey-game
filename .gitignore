@@ -6,5 +6,4 @@ functions/lib
 *-debug.log
 .tools
 *.local
-.env
 coverage
