@@ -1,4 +1,4 @@
-import { ArrowRight, Copy, DoorOpen, LoaderCircle, Plus, ShieldCheck, UsersRound } from "lucide-react";
+import { ArrowRight, Copy, DoorOpen, Eye, LoaderCircle, Plus, ShieldCheck, UsersRound } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/common/Brand";
@@ -80,6 +80,12 @@ export function HomePage() {
             </button>
             {error && <p className="text-center text-sm text-red-300">{error}</p>}
           </form>
+
+          {import.meta.env.DEV && (
+            <button type="button" className="secondary-button mt-3 w-full" onClick={() => navigate("/design-preview")}>
+              <Eye /> Oyun dizaynına bax
+            </button>
+          )}
 
           {useEmulators && <p className="mt-5 rounded-xl bg-sky-400/10 px-3 py-2 text-center text-[11px] font-semibold text-sky-200">Yerli sınaq rejimi aktivdir</p>}
         </div>
